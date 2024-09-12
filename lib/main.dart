@@ -5,18 +5,13 @@ Future<void> main() async {
   await SentryFlutter.init(
     (options) {
       options.dsn =
-          'https://285aacede8a49d75771faa766b2bc221@o4507937846657024.ingest.us.sentry.io/4507937848688640';
-      // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
-      // We recommend adjusting this value in production.
-      options.tracesSampleRate = 1.0;
-      // The sampling rate for profiling is relative to tracesSampleRate
-      // Setting to 1.0 will profile 100% of sampled transactions:
-      options.profilesSampleRate = 1.0;
-    },
-    appRunner: () => runApp(MyApp()),
-  );
+          'https://a6e3cd6a1c9ed0b1c2bfbd39707534af@o4507937846657024.ingest.us.sentry.io/4507937965998080';
+    options.tracesSampleRate = 0.01;
 
-  // or define SENTRY_DSN via Dart environment variable (--dart-define)
+      },
+
+    appRunner: () => runApp(const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sentry Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -40,6 +35,24 @@ class SentryHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    makeError();
+    return const Scaffold(
+      body: Center(
+        child: Text("Hi Sentry"),
+      ),
+    );
+  }
+
+ Future<void> makeError() async{
+    try {
+      String? firstName;
+      String? lastName;
+      print(firstName!+lastName!);
+    } catch (exception, stackTrace) {
+      Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 }
