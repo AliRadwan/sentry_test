@@ -1,10 +1,8 @@
-# sentry_test
 
-A new Flutter project.
+# Sentry Test Project
 
-## Getting Started
+This repository contains a sample Flutter project to demonstrate the integration and testing of Sentry for error tracking and monitoring in Flutter applications.
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
